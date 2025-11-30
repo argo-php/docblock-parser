@@ -38,11 +38,11 @@ class ValueConstTest extends TestCase
                 new ConstExprArrayNode([
                     new ConstExprArrayItemNode(
                         new ConstExprStringNode('foo', ConstExprStringNode::SINGLE_QUOTED),
-                        new ConstExprStringNode('Foo', ConstExprStringNode::SINGLE_QUOTED)
+                        new ConstExprStringNode('Foo', ConstExprStringNode::SINGLE_QUOTED),
                     ),
                     new ConstExprArrayItemNode(
                         new ConstExprStringNode('bar', ConstExprStringNode::SINGLE_QUOTED),
-                        new ConstExprStringNode('Bar', ConstExprStringNode::SINGLE_QUOTED)
+                        new ConstExprStringNode('Bar', ConstExprStringNode::SINGLE_QUOTED),
                     ),
                 ]),
             ),
