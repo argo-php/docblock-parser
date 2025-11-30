@@ -21,14 +21,14 @@ class ValueConstTest extends TestCase
 {
     public static function dataProvider(): iterable
     {
-        yield [new ValueConst(new ConstExprStringNode('Hello')), "'Hello'"];
+        yield [new ValueConst(new ConstExprStringNode('Hello', ConstExprStringNode::SINGLE_QUOTED)), "'Hello'"];
         yield [new ValueConst(new ConstExprIntegerNode('123')), '123'];
         yield [new ValueConst(new ConstExprArrayNode([])), '[]'];
         yield [
             new ValueConst(
                 new ConstExprArrayNode([
-                    new ConstExprArrayItemNode(null, new ConstExprStringNode('Foo')),
-                    new ConstExprArrayItemNode(null, new ConstExprStringNode('Bar')),
+                    new ConstExprArrayItemNode(null, new ConstExprStringNode('Foo', ConstExprStringNode::SINGLE_QUOTED)),
+                    new ConstExprArrayItemNode(null, new ConstExprStringNode('Bar', ConstExprStringNode::SINGLE_QUOTED)),
                 ]),
             ),
             "['Foo', 'Bar']",
@@ -36,8 +36,14 @@ class ValueConstTest extends TestCase
         yield [
             new ValueConst(
                 new ConstExprArrayNode([
-                    new ConstExprArrayItemNode(new ConstExprStringNode('foo'), new ConstExprStringNode('Foo')),
-                    new ConstExprArrayItemNode(new ConstExprStringNode('bar'), new ConstExprStringNode('Bar')),
+                    new ConstExprArrayItemNode(
+                        new ConstExprStringNode('foo', ConstExprStringNode::SINGLE_QUOTED),
+                        new ConstExprStringNode('Foo', ConstExprStringNode::SINGLE_QUOTED)
+                    ),
+                    new ConstExprArrayItemNode(
+                        new ConstExprStringNode('bar', ConstExprStringNode::SINGLE_QUOTED),
+                        new ConstExprStringNode('Bar', ConstExprStringNode::SINGLE_QUOTED)
+                    ),
                 ]),
             ),
             "['foo' => 'Foo', 'bar' => 'Bar']",

@@ -23,7 +23,9 @@ class MethodParameterTest extends TestCase
         yield [new MethodParameter('name', isReference: true), '&$name'];
         yield [new MethodParameter('name', isVariadic: true), '...$name'];
         yield [
-            new MethodParameter('name', defaultValue: new ValueConst(new ConstExprStringNode('hello'))),
+            new MethodParameter('name', defaultValue: new ValueConst(
+                new ConstExprStringNode('hello', ConstExprStringNode::SINGLE_QUOTED)
+            )),
             '$name = \'hello\'',
         ];
         yield [new MethodParameter('name', description: 'Hello'), '$name'];

@@ -10,6 +10,7 @@ use ArgoTest\DocBlockParser\TestCase;
 use PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprStringNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\SelfOutTagValueNode;
 use PHPStan\PhpDocParser\Ast\Type\ConstTypeNode;
+use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 
@@ -21,12 +22,7 @@ class UnknownTagTest extends TestCase
         yield [
             new UnknownTag(
                 'custom',
-                new SelfOutTagValueNode(
-                    new ConstTypeNode(
-                        new ConstExprStringNode('string'),
-                    ),
-                    'Hello',
-                ),
+                new SelfOutTagValueNode(new IdentifierTypeNode('string'), 'Hello'),
             ),
             '@custom string Hello',
         ];

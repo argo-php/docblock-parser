@@ -26,6 +26,7 @@ use PHPStan\PhpDocParser\Ast\PhpDoc;
 use PHPStan\PhpDocParser\Ast\Type;
 use PHPStan\PhpDocParser\Lexer\Lexer;
 use PHPStan\PhpDocParser\Parser as PhpStanParser;
+use PHPStan\PhpDocParser\ParserConfig;
 
 /**
  * @api
@@ -42,12 +43,13 @@ readonly class Parser
     public function parse(string $docBlock, ?Context $context = null): PhpDocument
     {
         try {
-            $lexer = new Lexer();
+            $parserConfig = new ParserConfig([]);
+            $lexer = new Lexer($parserConfig);
             $tokens = new PhpStanParser\TokenIterator($lexer->tokenize($docBlock));
 
-            $constantExprParser = new PhpStanParser\ConstExprParser();
-            $typeParser = new PhpStanParser\TypeParser($constantExprParser);
-            $phpDocParser = new PhpStanParser\PhpDocParser($typeParser, $constantExprParser);
+            $constantExprParser = new PhpStanParser\ConstExprParser($parserConfig);
+            $typeParser = new PhpStanParser\TypeParser($parserConfig, $constantExprParser);
+            $phpDocParser = new PhpStanParser\PhpDocParser($parserConfig, $typeParser, $constantExprParser);
             $phpDocNode = $phpDocParser->parse($tokens);
         } catch (PhpStanParser\ParserException $exception) {
             throw new ParserException(
